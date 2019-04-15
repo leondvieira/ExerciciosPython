@@ -2,6 +2,8 @@
 # coding: utf-8
 # Marco André <marcoandre@ifc-araquari.edu.br>
 # Lista de exercícios 2
+from math import ceil
+
 
 def media_final_aprovado_reprovado(p1, p2, ep1, ep2):
     ''' Recebe as notas das 2 provas e 2 exercícios de programação e retorna
@@ -98,11 +100,25 @@ def data_valida(data):
 
 def maior3(a, b, c):
     ''' Recebe tres valores, e retorna o maior dos tres'''
-
+    if a >= b and a >= c:
+        return a
+    elif b >= a and b >= c:
+        return b
+    elif c >= a and c >= b:
+        return c
+    else:
+        return False
 
 def menor3(a, b, c):
     ''' Recebe tres valores, e retorna o menor dos tres'''
-
+    if a <= b and a <= c:
+        return a
+    elif b <= a and b <= c:
+        return b
+    elif c <= a and c <= b:
+        return c
+    else:
+        return False
 
 def salario(dinheiro_horas, horas_mensais):
     ''' Recebe quanto ganha por hora e quantas horas trabalho ao mês,
@@ -112,6 +128,16 @@ def salario(dinheiro_horas, horas_mensais):
     - IR é 11% do salário bruto
     - Sindicato é 5% do salário bruto'''
 
+    salario_bruto = dinheiro_horas * horas_mensais
+
+    desc_inss = salario_bruto * 0.08
+    desc_ir = salario_bruto * 0.11
+    desc_sind = salario_bruto * 0.05
+
+    salario_liquido = (salario_bruto) - (desc_inss + desc_ir + desc_sind)
+
+    return salario_liquido
+
 
 def tinta(metros_pintar):
     ''' Recebe quanto metros quadrados precisa pintar,
@@ -119,12 +145,23 @@ def tinta(metros_pintar):
     A cobertura da tinta é de 3 metros por litro de tinta
     Cada lata possui 18 litros de tinta'''
 
+    if (metros_pintar % 54) != 0:
+        return ceil(metros_pintar / 54)
+    else:
+        return metros_pintar / 54
 
 def acrescimo_nota_bb(nota_sozinho, nota_com_ajuda):
     ''' Recebe a nota do litle brother antes de receber ajuda, e a nota
     depois que o big brother ajudou, e retorna o acrecimo que o big
      brother recebera em sua nota pela ajuda.
      O acréscimo é de 1/4 da diferença das notas, se for positivo'''
+
+    if nota_com_ajuda > nota_sozinho:
+        diferenca = (nota_com_ajuda - nota_sozinho)
+        nota_sozinho = (nota_sozinho + diferenca) / 4
+        return nota_sozinho
+    else:
+        return 0.0
 
 
 # Área de testes: só mexa aqui se souber o que está fazendo!
