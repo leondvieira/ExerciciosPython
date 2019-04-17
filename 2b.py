@@ -76,46 +76,34 @@ def caixa_eletronico(valor):
     Procure dar sempre o número mínimo de notas, partindo das maiores
     para as menores.
     '''
-    rst = 0
-    if valor > 600:
-        rst = []
-#Não sei essa caralha
-    elif valor <= 600:
-        n100 = round((valor / 100),2)
-        resto100 = valor % 100
-        n50 = round((resto100 / 50),2)
-        resto50 = n50 % 50
-        n25 = round((resto50 / 25),2)
-        resto25 = n50 % 25
-        n10 = round((resto25 / 10),2)
-        resto10 = n25 % 10
-        n5 = round((resto10 / 5),2)
-        resto5 = n10 % 5
-        n1 = round((resto5 / 1),2)
-        print((100,n100),(50,n50),(25,n25),(10,n10),(5,n5),(1,n1))
-        if n100 == 0 and n50 == 0 and n25 == 0 and n10 == 0 and n5 == 0 and n1 == 0:
-            rst = []
+    
+    saque = []
 
-        else:
+    if valor <= 600:
+        qnt_nota100 = valor // 100
+        qnt_nota50 = (valor % 100) // 50
+        qnt_nota25 = ((valor % 100) % 50) // 25
+        qnt_nota10 = (((valor % 100) % 50) % 25) // 10
+        qnt_nota5 = ((((valor % 100) % 50) % 25) % 10) // 5
+        qnt_nota1 = (((((valor % 100) % 50) % 25) % 10) % 5) // 1
 
-            if n100 >= 1 and n50 >= 1 and n25 >= 1 and n10 >= 1 and n5 >= 1 and n1 >= 1:
-                rst = [(100,n100),(50,n50),(25,n25),(10,n10),(5,n5),(1,n1)]
+        if qnt_nota100 != 0:
+            saque.append((100,qnt_nota100))
+        if qnt_nota50 != 0:
+            saque.append((50,qnt_nota50))
+        if qnt_nota25 != 0:
+            saque.append((25,qnt_nota25))
+        if qnt_nota10 != 0:
+            saque.append((10,qnt_nota10))
+        if qnt_nota5 != 0:
+            saque.append((5,qnt_nota5))
+        if qnt_nota1 != 0:
+            saque.append((1,qnt_nota1))
+        return saque
 
-            elif n100 == 0 and n50 >= 1 and n25 >= 1 and n10 >= 1 and n5 >= 1 and n1 >= 1:
-                rst = [(50, n50), (25, n25), (10, n10), (5, n5), (1, n1)]
+    else:
+        return []
 
-            elif n100 == 0 and n50 == 0 and n25 >= 1 and n10 >= 1 and n5 >= 1 and n1 >= 1:
-                rst = [(25, n25), (10, n10), (5, n5), (1, n1)]
-
-            elif n100 == 0 and n50 == 0 and n25 >= 0 and n10 >= 1 and n5 >= 1 and n1 >= 1:
-                rst = [(10, n10),(5, n5),(1, n1)]
-
-            elif n100 == 0 and n50 == 0 and n25 >= 0 and n10 >= 0 and n5 >= 1 and n1 >= 1:
-                rst = [(5, n5), (1, n1)]
-
-            elif n100 == 0 and n50 == 0 and n25 >= 0 and n10 >= 0 and n5 >= 0 and n1 >= 1:
-                rst = [(1, n1)]
-    return rst
 # Área de testes: só mexa aqui se souber o que está fazendo!
 acertos = 0
 total = 0
