@@ -46,7 +46,13 @@ def encontra_caracter(texto, caracter_procurado):
     '''Receba um texto e retorne a localização da primeira vez que
     aparece o caracter especificado. Não use métodos nativos, com texto.find(), index, etc.'''
 
-    return texto.find(caracter_procurado)
+
+    for posicao, caracter in enumerate(texto):
+        if caracter == caracter_procurado:
+            return posicao
+    else:
+        return -1
+
 
 def é_sortudo(numero):
     '''um número é sortudo se ele contém o dígito 2 mas não o dígito 7.'''
@@ -81,7 +87,7 @@ def é_azarado(numero):
 
     tamanho = len(numero)
 
-    if numero[0] != numero[tamanho]:
+    if numero[0] == numero[tamanho - 1]:
         return True
     else:
         return False
@@ -90,15 +96,36 @@ def é_azarado(numero):
 def soma_é_par(numero):
     '''A soma dos dígitos tem que ser par, porque isso é legal;
     '''
+    soma = 0
 
+    for digito in numero:
+        soma += int(digito)
+
+    if soma % 2 == 0:
+        return True
+    else:
+        return False
 
 def é_chato(numero):
     '''Não pode haver dois dígitos consecutivos idênticos, porque isso é chato.'''
 
+    anterior = ''
+    for digito in numero:
+        if digito == anterior:
+            return True
+        anterior = digito
+    else:
+        return False
 
 def é_número_válido(numero):
     '''Um número é válido se não é azarado, a soma é par e não é chato.'''
 
+    if é_azarado(numero) or é_chato(numero):
+        return False
+    elif soma_é_par(numero):
+        return True
+    else:
+        return False
 
 def ponteironuloville(telefones):
     '''Na pacata vila campestre de Ponteironuloville, todos os telefones
@@ -144,6 +171,16 @@ def ponteironuloville(telefones):
         Resposta: 39
     '''
 
+    cont = 0
+
+    for numero in telefones:
+        if é_chato(numero) or é_azarado(numero):
+            cont = cont
+
+        elif soma_é_par(numero) and len(numero) == 6:
+            cont += 1
+
+    return cont
 
 # Área de testes: só mexa aqui se souber o que está fazendo!
 acertos = 0
@@ -227,8 +264,11 @@ def main():
     test(é_número_válido('268264'), True)
 
     print(' Ponteironuloville:')
-    telefones = ['91775523', '88032828']
-    test(ponteironuloville(telefones), 0)
+    telefones1 = ['91775523', '88032828']
+    telefones2 = open('telefones.txt').read().strip().split()
+    test(ponteironuloville(telefones1), 0)
+    test(ponteironuloville(telefones2), 39)
+
     telefones = '''
         213752 216732 221063 221545 225583 229133 230648 233222
         236043 237330 239636 240138 242123 246224 249183 252936
@@ -256,7 +296,8 @@ def main():
         657143 677125 435054 462985 482422 497901 518232 535183
         551595 575447 587393 600953 615233 633673 659902 678315
     '''.strip().split()
-    test(ponteironuloville(telefones), 39)
+
+    #test(ponteironuloville(telefones), 39)
     #telefones = open('telefones.txt').read().strip().split()
     #test(ponteironuloville(telefones), 39)
 
