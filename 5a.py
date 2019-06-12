@@ -76,11 +76,31 @@ def crescimento_populacional(populacao1, populacao2, crescimento1,
 def Fibonacci(n):
     ''' Retorne o n-ésimo valor da série de Fibonacci
     Fibonacci = 1,1,2,3,5,8,13,...'''
+    #
+    # ant = 0
+    # atual = 0
+    # ini = 1
+    # count = 0
+    # while count < n:
+    #     atual = ant + ini
+    #     ini = ant
+    #     ant = atual
+    #     count += 1
 
     result = 0
-    a = 1
-    while result < n:
-        result
+    atual = 1
+    count = 0
+
+    while count < n:
+        ant = atual
+        atual = result
+        result = atual + ant
+
+        count += 1
+
+    return result
+
+
 
 def fatorial(numero):
     ''' Calcule e retorne o fatorial do 'numero' informado,
