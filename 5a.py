@@ -76,16 +76,6 @@ def crescimento_populacional(populacao1, populacao2, crescimento1,
 def Fibonacci(n):
     ''' Retorne o n-ésimo valor da série de Fibonacci
     Fibonacci = 1,1,2,3,5,8,13,...'''
-    #
-    # ant = 0
-    # atual = 0
-    # ini = 1
-    # count = 0
-    # while count < n:
-    #     atual = ant + ini
-    #     ini = ant
-    #     ant = atual
-    #     count += 1
 
     result = 0
     atual = 1
@@ -100,17 +90,39 @@ def Fibonacci(n):
 
     return result
 
-
-
 def fatorial(numero):
     ''' Calcule e retorne o fatorial do 'numero' informado,
     O fatorial é o valor produtório dos valores menores ou iguais ao número
     ex: fatorial de 4 é 4*3*2*1 e retorna 24'''
 
+    result = 1
+
+    while numero > 0:
+        result *= numero
+        numero -= 1
+
+    return result
+
+
 
 def é_primo(valor):
     ''' Verifique se o 'valor' informado é primo.
     Um número primo é aquele que é divisível apenas por ele mesmo e por 1'''
+
+    divisiveis = 0
+    count = valor
+
+    while count > 0:
+        if valor % count == 0:
+            divisiveis += 1
+
+        count -= 1
+
+    if divisiveis > 2 or valor == 0 or valor == 1:
+        return False
+    else:
+        return True
+
 
 
 def quantidade_de_primos(comeco, final):
