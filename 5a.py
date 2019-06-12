@@ -123,25 +123,60 @@ def é_primo(valor):
     else:
         return True
 
-
-
 def quantidade_de_primos(comeco, final):
     ''' Retorne a quantidade de primos entre os valores informados'''
 
+
+    qnt_primos = 0
+
+    while comeco < final:
+        comeco += 1
+        if é_primo(comeco):
+            qnt_primos += 1
+
+    return qnt_primos
 
 def lista_de_primos(inicio, fim):
     '''Retorne uma lista de primos entre os valores informados, incluindo
     os limites'''
 
+    numeros = []
+
+    while inicio <= fim:
+        if é_primo(inicio):
+            numeros.append(inicio)
+
+        inicio += 1
+    return numeros
 
 def serie1(n):
     '''Dado n, calcule o valor de
     s = 1 + 1/2 + 1/3 + 1/4 + ... + 1/n '''
 
+    count = 1
+    s = 0
+
+    while count <= n:
+        s += (1/count)
+        count += 1
+
+    return round(s, 2)
 
 def serie2(n):
     '''Dado n, calcule o valor de
     s = 1/1 + 2/3 + 3/5 + 4/7 + 5/9 + ... + n/m'''
+
+    count = 1
+    dividendo = 1
+    divisor = 1
+    res = 0
+
+    while count <= n:
+        res += dividendo/divisor
+        dividendo += 1
+        divisor += 2
+        count += 1
+    return round(res, 2)
 
 
 def serie_pi(n):
@@ -149,6 +184,21 @@ def serie_pi(n):
     4/1 - 4/3 + 4/5 - 4/7 + ... - 4/m, sendo informado
     o número n de iterações '''
 
+    count = 0
+    divisor = 1
+    res = 0
+
+    while count < n:
+
+        if count % 2 == 0:
+            res += 4/divisor
+        else:
+            res -= 4/divisor
+
+        count += 1
+        divisor += 2
+
+    return round(res, 6)
 
 # Área de testes: só mexa aqui se souber o que está fazendo!
 acertos = 0
