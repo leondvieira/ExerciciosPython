@@ -1,0 +1,4 @@
+Anita;11.1
+Beto;4.5
+Júlia;15.0
+Juarez;7.8
